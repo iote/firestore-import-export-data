@@ -9,8 +9,8 @@ const { initializeApp, backup } = require('firestore-export-import');
 const fs = require('fs');
 
 // env type :: { sourcEnv: string (read from); targetEnv: string (send too); store?: boolean (store copy on disk) }
-const env = require('environments/environment.js');
-const serviceAccount = require(env.sourceEnv);
+const env = require('./environments/environment.js');
+const serviceAccount = require('./environments/source-key.json');
 
 
 // Initiate Firebase App
@@ -18,7 +18,7 @@ initializeApp(serviceAccount);
 
 // Export file
 backup(env.sourceCollectionName).then((data) => {
-  const fileName = `output/${new Date().getTime()}_${env.sourceEnvName}`;
+  const fileName = `output/${new Date().getTime()}_${env.sourceEnvName}.json`;
   fs.writeFileSync(fileName, JSON.stringify(data));
 
   console.log('Success!');

@@ -1,2 +1,5 @@
 environments
 environments/*
+
+node_modules
+node_modules/*
